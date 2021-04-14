@@ -8,4 +8,5 @@ Address: 0x5B
 Address: 0x5B
 
 ## Bosh BME680 
-Address: 0x32
+Address: 0x77
+https://github.com/pimoroni/bme680-python
