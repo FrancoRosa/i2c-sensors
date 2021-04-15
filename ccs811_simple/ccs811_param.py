@@ -4,7 +4,6 @@ channel = 1                                 #/dev/i2c-1
 #  CCS811 defaults to address 0x5A
 CCS811_I2C_ADDRESS = 0x5B                   #alt address 0x5B
 
-
 # remove comment on line bellow in order to enable sensor HARWARE reset  
 CCS811_RESET_PIN = 27                        #GPIO connected to !RESET pin      [GPIO.BOARD numbering]
 
