@@ -4,8 +4,8 @@
 ## Group Test
 After installing the requiremens stated on each sensor run the following command:
 
-```
-python3 group_test.py
+```bash
+$ python3 group_test.py
 ```
 
 ## CSS811
@@ -15,14 +15,14 @@ Documentation: https://itbrainpower.net/a-gsm/RaspberryPI-CCS811-sensor_howto
 
 Requirements:
 
-```
-pip3 install smbus2
+```bash
+$ pip3 install smbus2
 ```
 
 Test script:
 
-```
-python3 ccs811_test.py
+```bash
+$ python3 ccs811_test.py
 ```
 
 ## Bosh BME680 
@@ -33,14 +33,14 @@ Documentation: https://github.com/pimoroni/bme680-python
 
 Requirements:
 
-```
-pip3 install bme680
+```bash
+$ pip3 install bme680
 ```
 
 Test script:
 
-```
-python3 ccs811_test.py
+```bash
+$ python3 ccs811_test.py
 ```
 
 ## Sensirion SFA30
@@ -51,12 +51,12 @@ Documentation: https://sensirion.github.io/python-shdlc-sfa3x/
 
 Requirements:
 
-```
-pip install sensirion-shdlc-sfa3x
+```bash
+$ pip3 install sensirion-shdlc-sfa3x
 ```
 
 Test script:
 
-```
-python3 sfa30_test.py
+```bash
+$ python3 sfa30_test.py
 ```
