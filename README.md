@@ -10,6 +10,9 @@ pip3 install adafruit-circuitpython-lis3dh
 ## CSS811
 Address: 0x5B
 https://itbrainpower.net/a-gsm/RaspberryPI-CCS811-sensor_howto
+```
+pip3 install smbus2
+```
 
 ## Bosh BME680 
 Address: 0x77
