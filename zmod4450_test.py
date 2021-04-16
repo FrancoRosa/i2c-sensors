@@ -63,6 +63,10 @@ def read_byte(reg):
 def write_byte(reg, data):
   return i2cbus.write_byte_data(dev, reg, data)
 
+def write_bytes(reg, data, length):
+  for i in range(length):
+    result.append(write_byte(reg + i, data[i]))
+
 def read_bytes(reg, length):
   result = []
   for i in range(length):
