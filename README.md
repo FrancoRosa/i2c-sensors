@@ -1,5 +1,5 @@
 # I2C Sensors
->> Read sensors from RPi
+> Read sensors from RPi
 
 ## Enable circuit python
 https://github.com/adafruit/Adafruit_CircuitPython_Bundle
@@ -31,5 +31,10 @@ pip install sensirion-shdlc-sfa3x
 Address: 0x32
 https://github.com/sparkfun/SparkFun_Refrigeration_Gas_Sensor_ZMOD4450_Qwiic
 
+______________________________
+Working scripts
+python3 sfa30_test.py
+python3 read_all_bme680.py 
+python3 ccs811_simple/ccs811_simple.py
 
 3AiRemedy

@@ -63,20 +63,20 @@ def ccs811GPIOInit():
         GPIO.setmode(GPIO.BOARD)
         GPIO.setwarnings(False)
         #GPIO.cleanup()
-        print ("init CCS811 control GPIOs")
+        print("init CCS811 control GPIOs")
 
         try:
                 GPIO.setup(CCS811_RESET_PIN, GPIO.IN)
         except:
                 HWRST = False
-                print "no RESET PIN defined"
+                print("no RESET PIN defined")
 
         try:
                 GPIO.setup(CCS811_WAKE_PIN, GPIO.OUT, initial=GPIO.LOW)
                 GPIO.output(CCS811_WAKE_PIN,GPIO.LOW)
         except:
                 SleepWake = False
-                print "no sleep wake control PIN defined"
+                print("no sleep wake control PIN defined")
 
         sleep(0.2)
         
@@ -101,7 +101,7 @@ def ccs811HWReset():
         tVOC = 0
 
         if HWRST == False:
-                print "no RESET PIN defined"
+                print("no RESET PIN defined")
                 return
 
         GPIO.setup(CCS811_RESET_PIN, GPIO.OUT, initial=GPIO.LOW)
@@ -171,7 +171,7 @@ def ccs811PrintError():
 
 def ccs811CheckForError():
         value = ccs811ReadRegister(CCS811_STATUS)
-        #print "STATUS register : 0x%02x " %value
+        #print("STATUS register : 0x%02x " %value)
         return value & 1 << 0
 
 #Mode 0 = Idle
@@ -190,7 +190,7 @@ def ccs811SetDriveMode(mode):
 
 
 def ccs811AppValid():
-        #print "AppValid to be done"
+        #print("AppValid to be done")
         value = ccs811ReadRegister(CCS811_STATUS)
         return (value & 1 << 4)
 
@@ -250,8 +250,8 @@ def ccs811GetBaseline():
         baselineMSB = contents[0]
         baselineLSB = contents[1]
 
-        #print "baselineMSB: 0x%02x " %baselineMSB
-        #print "baselineLSB: 0x%02x " %baselineLSB
+        #print("baselineMSB: 0x%02x " %baselineMSB)
+        #print("baselineLSB: 0x%02x " %baselineLSB)
 
         baseline = (baselineMSB << 8) | baselineLSB
         return baseline
@@ -267,44 +267,44 @@ def ccs811Begin(driveMode):
         if(HWRST != False):
                 ccs811HWReset()
         else:
-                print ("sofware reset")
+                print("sofware reset")
                 ccs811SWReset()
         
         ccs811Wake()
 
         contents = ccs811ReadRegister(CCS811_HW_ID)             #Hardware ID should be 0x81
-        print "CCS811_HW_ID : 0x%02x " %contents
+        print("CCS811_HW_ID : 0x%02x " %contents)
  
 
         if (contents != 0x81):                                  #"CCS811 not found. Please check wiring."
-                print "CCS811 not found. Please check wiring."
+                print("CCS811 not found. Please check wiring.")
                 #return -1
         else:
-                print "CCS811 found."
+                print("CCS811 found.")
                 
         if (ccs811CheckForError() == True):
-                print "Error at startup"
+                print("Error at startup")
                 ccs811PrintError()
                 #return -2
         else:
-                print "Clean startup"
+                print("Clean startup")
 
                 
         if (ccs811AppValid() == False):
-                print "Error: App not valid."
+                print("Error: App not valid.")
                 #return -3
         else:
-                print "App valid"
+                print("App valid")
 
         bus.write_byte(CCS811_I2C_ADDRESS, CCS811_APP_START)
 
 
         if (ccs811CheckForError() == True):
-                print "Error at AppStart"
+                print("Error at AppStart")
                 ccs811PrintError()
                 #return -4
         else:
-                print "Clean AppStart"
+                print("Clean AppStart")
 
         ccs811DisableInterrupts()
 
@@ -314,14 +314,14 @@ def ccs811Begin(driveMode):
         #sleep(0.5)
 
         if (ccs811CheckForError() == True):
-                print "Error at SetDriveMode"
+                print("Error at SetDriveMode")
                 ccs811PrintError()
                 #return -5
         else:
-                print "Clean SetDriveMode"
+                print("Clean SetDriveMode")
 
         result = ccs811GetBaseline()
-        print "baseline for this sensor: 0x%02x " %result
+        print("baseline for this sensor: 0x%02x " %result)
         return 0  
 
 
@@ -330,9 +330,9 @@ def ccs811SetEnvironmentalData(relativeHumidity, temperature):
         temp = int(temperature * 1000)
 
         if ((rH % 1000) / 100) > 7:
-                envData0 = (rH / 1000 + 1) << 1
+                envData0 = int(rH / 1000 + 1) << 1
         else:
-                envData0 = (rH / 1000) << 1
+                envData0 = int(rH / 1000) << 1
                 
         envData1 = 0                            #CCS811 only supports increments of 0.5 so bits 7-0 will always be zero
 
@@ -343,9 +343,9 @@ def ccs811SetEnvironmentalData(relativeHumidity, temperature):
 
         #Split value into 7-bit integer and 9-bit fractional
         if ((temp % 1000) / 100) > 7:
-                envData2 = (temp / 1000 + 1) << 1
+                envData2 = int(temp / 1000 + 1) << 1
         else:
-                envData2 = (temp / 1000) << 1
+                envData2 = int(temp / 1000) << 1
 
         envData3 = 0
 
@@ -372,7 +372,7 @@ def ccs811GetTVOC():
 # Initialize I2C (SMBus)
 try:
     configContents = ccs811ReadRegister(CCS811_HW_ID)
-    print "I2C alredy loaded"
+    print("I2C alredy loaded")
 except:
     bus = smbus.SMBus(channel)
 
