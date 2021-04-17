@@ -60,3 +60,28 @@ Test script:
 ```bash
 $ python3 sfa30_test.py
 ```
+## Sensirion SGP40 
+
+I2C Bus Address: 0x59 (disclaimer: i2cdetect wont recognize it)
+
+Documentation: This device uses 16bit addresses, the easiest way to communicate with it is to use, circuit-python. 
+https://github.com/adafruit/Adafruit_CircuitPython_Bundle
+https://github.com/adafruit/Adafruit_CircuitPython_SGP40
+
+Requirements:
+Circuit python:
+
+```bash
+pip3 install adafruit-circuitpython-lis3dh
+```
+Sensor library:
+
+```bash
+$ pip3 install adafruit-circuitpython-sgp40
+```
+
+Test script:
+
+```bash
+$ python3 sgp40_test.py
+```
