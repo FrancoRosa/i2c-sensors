@@ -72,7 +72,7 @@ Requirements:
 Circuit python:
 
 ```bash
-pip3 install adafruit-circuitpython-lis3dh
+$ pip3 install adafruit-circuitpython-lis3dh
 ```
 Sensor library:
 

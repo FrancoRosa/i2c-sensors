@@ -73,7 +73,7 @@ sgp = adafruit_sgp40.SGP40(i2c, address = 0x59)
 
 while True:
     
-    ######### SFA RELATED CODE #################
+    ######### SFA30 RELATED CODE #################
     hcho, humidity, temperature = device.read_measured_values()
     print("__________________________")
     print("\n___    SFA30 VALUES    ___\n")
