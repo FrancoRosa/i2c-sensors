@@ -60,7 +60,7 @@ def ccs811GPIOInit():
         global HWRST
         global SleepWake
 
-        GPIO.setmode(GPIO.BOARD)
+        GPIO.setmode(GPIO.BCM)
         GPIO.setwarnings(False)
         #GPIO.cleanup()
         print("init CCS811 control GPIOs")

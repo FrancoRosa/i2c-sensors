@@ -3,7 +3,7 @@ import time
 temperature = 0
 humidity = 0
 
-######### SFA RELATED CODE #################
+######### SFA30 RELATED CODE #################
 from sensirion_shdlc_driver import ShdlcSerialPort, ShdlcConnection
 from sensirion_shdlc_sfa3x import Sfa3xShdlcDevice
 port = ShdlcSerialPort(port='/dev/ttyS0', baudrate=115200)
@@ -59,7 +59,16 @@ sensor.select_gas_heater_profile(0)
 
 ######### CCS811 RELATED CODE #################
 from ccs811 import *
-ccs811Begin(CCS811_driveMode_1sec)                                      #start CCS811, data update rate at 1sec
+ccs811Begin(CCS811_driveMode_1sec)                                      
+###########################################
+
+######### SGP40 RELATED CODE #################
+import board
+import busio
+import adafruit_sgp40
+
+i2c = busio.I2C(board.SCL, board.SDA)
+sgp = adafruit_sgp40.SGP40(i2c, address = 0x59)                                   
 ###########################################
 
 while True:
@@ -102,5 +111,11 @@ while True:
 
     ############################################
     
+    ######### CCS811 RELATED CODE #################
+    print("\n___    SGP40 VALUES    ___\n")
+    print("Raw Gas: ", sgp.raw)
+    
+    ############################################
+
     print('\n\n\n')
     time.sleep(2)

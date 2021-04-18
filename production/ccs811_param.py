@@ -5,10 +5,10 @@ channel = 1                                 #/dev/i2c-1
 CCS811_I2C_ADDRESS = 0x5B                   #alt address 0x5B
 
 # remove comment on line bellow in order to enable sensor HARWARE reset  
-CCS811_RESET_PIN = 27                        #GPIO connected to !RESET pin      [GPIO.BOARD numbering]
+CCS811_RESET_PIN = 13    #27 BCM   #13 Board                  #GPIO connected to !RESET pin      [GPIO.BOARD numbering]
 
 # leave bellow line commentes if you connect s-Sense CCS881 pad 6 to RPI GND 
-CCS811_WAKE_PIN = 17                        #GPIO connected to !WAKE pin       [GPIO.BOARD numbering]
+CCS811_WAKE_PIN = 11    #17 BCM   #11 Board                 #GPIO connected to !WAKE pin       [GPIO.BOARD numbering]
 
 
 """do not change definitions bellow"""
