@@ -74,15 +74,19 @@ sgp = adafruit_sgp40.SGP40(i2c, address = 0x59)
 while True:
     
     ######### SFA30 RELATED CODE #################
-    hcho, humidity, temperature = device.read_measured_values()
     print("__________________________")
     print("\n___    SFA30 VALUES    ___\n")
-    print("{}, {}, {}".format(hcho, humidity, temperature))
+    try:
+        hcho, humidity, temperature = device.read_measured_values()
+        print("{}, {}, {}".format(hcho, humidity, temperature))
+    except:
+        print('... SFA30 sensor error')
     ############################################
 
     ######### BME680 RELATED CODE #################
-    if sensor.get_sensor_data():
-            print("\n___    BME680 VALUES    ___\n")
+    print("\n___    BME680 VALUES    ___\n")
+    try:
+        if sensor.get_sensor_data():
             output = '{0:.2f} C,{1:.2f} hPa,{2:.2f} %RH'.format(
                 sensor.data.temperature,
                 sensor.data.pressure,
@@ -95,26 +99,35 @@ while True:
 
             else:
                 print(output)
-    ############################################
-    
-    ######### CCS811 RELATED CODE #################
-    ccs811SetEnvironmentalData(sensor.data.temperature, sensor.data.humidity)                       #replace with temperature and humidity values from HDC2010 sensor
-
-    if ccs811CheckDataAndUpdate():
-            CO2 = ccs811GetCO2()
-            tVOC = ccs811GetTVOC()
-            print("\n___    CCS811 VALUES    ___\n")
-            print("CO2 : %d ppm" %CO2)
-            print("tVOC : %d ppb" %tVOC)
-    elif ccs811CheckForError():
-            ccs811PrintError()
+    except:
+        print('... BME680 sensor error')
 
     ############################################
     
     ######### CCS811 RELATED CODE #################
+    print("\n___    CCS811 VALUES    ___\n")
+    try:
+        ccs811SetEnvironmentalData(sensor.data.temperature, sensor.data.humidity)                       #replace with temperature and humidity values from HDC2010 sensor
+
+        if ccs811CheckDataAndUpdate():
+                CO2 = ccs811GetCO2()
+                tVOC = ccs811GetTVOC()
+                print("CO2 : %d ppm" %CO2)
+                print("tVOC : %d ppb" %tVOC)
+        elif ccs811CheckForError():
+                ccs811PrintError()
+    except:
+        print('... CCS811 sensor error')
+
+    ############################################
+    
+    ######### SGP40 RELATED CODE #################
     print("\n___    SGP40 VALUES    ___\n")
-    print("Raw Gas: ", sgp.raw)
-    
+    try:
+        print("Raw Gas: ", sgp.raw)
+    except:
+        print('... SGP40 sensor error')
+
     ############################################
 
     print('\n\n\n')

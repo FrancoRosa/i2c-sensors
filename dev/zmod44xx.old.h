@@ -23,8 +23,6 @@ extern "C" {
 #endif
 
 #include "zmod44xx_types.h"
-#include "wiringPiI2C.h"
-#include "wiringPi.h"
 
 #define ZMOD4450_I2C_ADDRESS        (0x32)
 
@@ -54,7 +52,7 @@ extern "C" {
  * @note    This function must be called once before running other sensor
  *          functions.
  */
-int8_t zmod44xx_read_sensor_info();
+int8_t zmod44xx_read_sensor_info(zmod44xx_dev_t* dev);
 
 /**
  * @brief   Initialize the sensor after power on.
@@ -63,7 +61,7 @@ int8_t zmod44xx_read_sensor_info();
  * @retval  0 success
  * @retval  "!= 0" error
  */
-int8_t zmod44xx_init_sensor();
+int8_t zmod44xx_init_sensor(zmod44xx_dev_t* dev);
 
 /**
  * @brief   Initialize the sensor for zmod4450 measurement.
@@ -72,7 +70,7 @@ int8_t zmod44xx_init_sensor();
  * @retval  0 success
  * @retval  "!= 0" error
  */
-int8_t zmod44xx_init_measurement();
+int8_t zmod44xx_init_measurement(zmod44xx_dev_t* dev);
 
 /**
  * @brief   Start the measurement.
@@ -81,7 +79,7 @@ int8_t zmod44xx_init_measurement();
  * @retval  0 success
  * @retval  "!= 0" error
  */
-int8_t zmod44xx_start_measurement();
+int8_t zmod44xx_start_measurement(zmod44xx_dev_t* dev);
 
 /**
  * @brief   Read the status of the device.
@@ -91,7 +89,7 @@ int8_t zmod44xx_start_measurement();
  * @retval  0 success
  * @retval  "!= 0" error
  */
-int8_t zmod44xx_read_status(uint8_t* status);
+int8_t zmod44xx_read_status(zmod44xx_dev_t* dev, uint8_t* status);
 
 /**
  * @brief   Read adc values from sensor and calculate RMOX
@@ -101,7 +99,7 @@ int8_t zmod44xx_read_status(uint8_t* status);
  * @retval  0 success
  * @retval  "!= 0" error
  */
-int8_t zmod44xx_read_rmox(float* rmox);
+int8_t zmod44xx_read_rmox(zmod44xx_dev_t* dev, float* rmox);
 
 #ifdef __cplusplus
 }
