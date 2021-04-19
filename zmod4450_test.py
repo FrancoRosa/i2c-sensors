@@ -148,12 +148,13 @@ def init_measurement():
   write_bytes(meas_conf['s']['addr'], meas_conf['s']['data'], meas_conf['s']['len'])
 
 
-print('_______________')
+print('______________________________')
+
 read_status()
 read_sensor_info()
 init_sensor()
 init_measurement()
-print('_______________')
+print('_______________________________')
 
 # print(i2cbus.write_byte_data(dev1, test_add1, 0xff))
 # print(i2cbus.write_byte_data(dev1, test_add2, 0xff))

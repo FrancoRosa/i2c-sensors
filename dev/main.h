@@ -15,13 +15,11 @@
  * @author  IDT
  */
 
-// #include <conio.h> /* This include is just for Windows PCs. */
+#include <conio.h> /* This include is just for Windows PCs. */
 
 /* Files needed for hardware access, needs to be adjusted to target. */
-// #include "../dependencies/hicom/hicom.h"
-// #include "../dependencies/hicom/hicom_i2c.h"
-
-#include <wiringPi.h>
+#include "hicom.h"
+#include "hicom_i2c.h"
 
 /* files to control the sensor */
 #include "continuous.h"

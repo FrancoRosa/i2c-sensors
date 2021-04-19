@@ -16,8 +16,9 @@
  **/
 
 #include "main.h"
+#define CONTINUOUS_MODE
 /* forward declaration */
-// void print_hicom_error(hicom_status_t status);
+void print_hicom_error(hicom_status_t status);
 
 int main()
 {
@@ -31,20 +32,20 @@ int main()
     /* ****** BEGIN TARGET SPECIFIC INITIALIZATION ************************** */
     /* This part automatically resets the sensor. */
     /* connect to HiCom board */
-    // hicom_status = hicom_open(&hicom_handle);
-    // if (FTC_SUCCESS != hicom_status) {
-    //     print_hicom_error(hicom_status);
-    //     return hicom_status;
-    // }
+    hicom_status = hicom_open(&hicom_handle);
+    if (FTC_SUCCESS != hicom_status) {
+        print_hicom_error(hicom_status);
+        return hicom_status;
+    }
 
-    // /* switch supply on */
-    // hicom_status = hicom_power_on(hicom_handle);
-    // if (FTC_SUCCESS != hicom_status) {
-    //     print_hicom_error(hicom_status);
-    //     return hicom_status;
-    // }
+    /* switch supply on */
+    hicom_status = hicom_power_on(hicom_handle);
+    if (FTC_SUCCESS != hicom_status) {
+        print_hicom_error(hicom_status);
+        return hicom_status;
+    }
 
-    // set_hicom_handle(&hicom_handle);
+    set_hicom_handle(&hicom_handle);
 
     /* ****** END TARGET SPECIFIC INITIALIZATION **************************** */
 
@@ -129,9 +130,9 @@ exit:
     return 0;
 }
 
-// void print_hicom_error(hicom_status_t status)
-// {
-//     char error_str[512];
-//     hicom_get_error_string(status, error_str, sizeof error_str);
-//     fprintf(stderr, "ERROR (HiCom): %s\n", error_str);
-// }
+void print_hicom_error(hicom_status_t status)
+{
+    char error_str[512];
+    hicom_get_error_string(status, error_str, sizeof error_str);
+    fprintf(stderr, "ERROR (HiCom): %s\n", error_str);
+}
