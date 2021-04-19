@@ -81,6 +81,7 @@ while True:
         print("{}, {}, {}".format(hcho, humidity, temperature))
     except:
         print('... SFA30 sensor error')
+    time.sleep(0.1)
     ############################################
 
     ######### BME680 RELATED CODE #################
@@ -101,7 +102,7 @@ while True:
                 print(output)
     except:
         print('... BME680 sensor error')
-
+    time.sleep(0.1)
     ############################################
     
     ######### CCS811 RELATED CODE #################
@@ -118,7 +119,7 @@ while True:
                 ccs811PrintError()
     except:
         print('... CCS811 sensor error')
-
+    time.sleep(0.1)
     ############################################
     
     ######### SGP40 RELATED CODE #################
