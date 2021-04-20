@@ -107,7 +107,7 @@ root@remoteserver.com password
 ## Steps to set SSH tunnels with this server
 
 ### On Master or on the RemoteServer
-```
+```bash
 sudo nano /etc/ssh/sshd_config
 ```
 add the following line:
