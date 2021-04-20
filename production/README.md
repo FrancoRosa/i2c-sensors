@@ -60,6 +60,7 @@ Test script:
 ```bash
 $ python3 sfa30_test.py
 ```
+
 ## Sensirion SGP40 
 
 I2C Bus Address: 0x59 (disclaimer: i2cdetect wont recognize it)
@@ -84,4 +85,17 @@ Test script:
 
 ```bash
 $ python3 sgp40_test.py
+```
+
+## Logger
+This script captures data in continus mode, once we stop the program with ```ctrl + c``` it creates a cvs file with all the stored data.
+
+It can be used with 'file name' or without it.
+
+```bash
+$ python3 logger.py 'sample with fan'
+```
+
+```bash
+$ python3 logger.py
 ```

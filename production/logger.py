@@ -73,7 +73,7 @@ from datetime import datetime
 import csv
 import signal
 import sys
-directory = '/home/pi/i2c-sensors'
+directory = '/home/pi/i2c-sensors/'
 
 class GracefulKiller:
   kill_now = False
@@ -102,12 +102,13 @@ except:
 header = [
          'timestamp', 
          'sfa_temp(°C)', 'sfa_hum(%)', 'sfa_fmdh(ppb)',
-         'bme_temp(°C)', 'bme_pressure(hPa)', 'bme_hum(%)', 'bme_gas_resis(Ohms)',
+         'bme_temp(°C)', 'bme_pres(hPa)', 'bme_hum(%)', 'bme_resis(Ohms)',
          'ccs_co2(ppm)', 'ccs_tvoc(ppb)',
          'spg_raw'
          ]
 
 values = [header]
+print(header)
 
 ############################################
 t = 1
@@ -125,9 +126,6 @@ while not killer.kill_now:
       row.append(humidity.percent_rh)
       row.append(hcho.ppb)
     except:
-      row.append('err')
-      row.append('err')
-      row.append('err')
       print('... SFA30 sensor error')
     time.sleep(0.1)
     ############################################
@@ -145,10 +143,6 @@ while not killer.kill_now:
           row.append(output)
     except:
       print('... BME680 sensor error')
-      row.append('err')
-      row.append('err')
-      row.append('err')
-      row.append('err')
     time.sleep(0.1)
     ############################################
     ######### CCS811 RELATED CODE #################
@@ -163,8 +157,6 @@ while not killer.kill_now:
         ccs811PrintError()
     except:
       print('... CCS811 sensor error')
-      row.append('err')
-      row.append('err')
     time.sleep(0.1)
     ############################################
     
@@ -173,14 +165,12 @@ while not killer.kill_now:
         row.append(sgp.raw)
     except:
         print('... SGP40 sensor error')
-        row.append('err')
 
     ############################################
-    print('sample:', t, row)
-    print('hreaders:', len(header), "values:", len(row))
     if len(row) == len(header):
       values.append(row)
-    t = t + 1
+      print('sample:', t, row)
+      t = t + 1
     time.sleep(2)
 
 
