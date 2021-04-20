@@ -99,3 +99,31 @@ $ python3 logger.py 'sample with fan'
 ```bash
 $ python3 logger.py
 ```
+
+## Remote Server
+
+root@remoteserver.com password
+
+## Steps to set SSH tunnels with this server
+
+### On Master or on the RemoteServer
+```
+sudo nano /etc/ssh/sshd_config
+```
+add the following line:
+```bash
+GatewayPorts yes
+```
+
+### On Slave or on the Raspberries
+```bash
+ssh-keygen -t rsa
+ssh-copy-id -i ~/.ssh/id_rsa.pub root@remoteserver.com
+
+#After installing autossh (sudo apt install autossh)
+autossh -M 21001 -fN                                           \
+-o "PubkeyAuthentication=yes" -o "StrictHostKeyChecking=false" \
+-o "PasswordAuthentication=no" -o "ServerAliveInterval 60"     \
+-o "ServerAliveCountMax 3"                                     \
+-R healthrecord.in:20001:localhost:22 -i                       \
+/home/pi/.ssh/id_rsa root@remoteserver.com
