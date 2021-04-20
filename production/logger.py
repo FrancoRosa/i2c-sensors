@@ -1,8 +1,5 @@
 import time
 
-temperature = 0
-humidity = 0
-
 ######### SFA30 RELATED CODE #################
 from sensirion_shdlc_driver import ShdlcSerialPort, ShdlcConnection
 from sensirion_shdlc_sfa3x import Sfa3xShdlcDevice
@@ -76,7 +73,7 @@ from datetime import datetime
 import csv
 import signal
 import sys
-
+directory = '/home/pi/i2c-sensors'
 
 class GracefulKiller:
   kill_now = False
@@ -98,9 +95,9 @@ def timestart():
   return z.strftime("%Y%m%d_%H:%M:%S")
 
 try:
-  filename = timestart() + '_' + str(sys.argv[1]) + '.csv'
+  filename = directory + timestart() + '_' + str(sys.argv[1]) + '.csv'
 except:
-  filename = timestart() + '.csv'
+  filename = directory + timestart() + '.csv'
 
 header = [
          'timestamp', 
