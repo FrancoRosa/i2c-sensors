@@ -241,8 +241,6 @@ def ccs811CheckDataAndUpdate():
                 return False
 
         
-
-
 def ccs811GetBaseline():
         global bus
 
@@ -256,8 +254,13 @@ def ccs811GetBaseline():
         baseline = (baselineMSB << 8) | baselineLSB
         return baseline
 
+def ccs811SetBaseline(baseline):
+        global bus
+        baselineMSB = (baseline >> 8) & 0xFF
+        baselineLSB = baseline & 0xFF
+        result = ccs811NWriteRegisters(CCS811_BASELINE, baseline)
+        return result
 
-        
 def ccs811Begin(driveMode):
         global HWRST
         global SleepWake
@@ -372,7 +375,7 @@ def ccs811GetTVOC():
 # Initialize I2C (SMBus)
 try:
     configContents = ccs811ReadRegister(CCS811_HW_ID)
-    print("I2C alredy loaded")
+    print("I2C already loaded")
 except:
     bus = smbus.SMBus(channel)
 
