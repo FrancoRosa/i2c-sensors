@@ -258,7 +258,7 @@ def ccs811SetBaseline(baseline):
         global bus
         baselineMSB = (baseline >> 8) & 0xFF
         baselineLSB = baseline & 0xFF
-        result = ccs811NWriteRegisters(CCS811_BASELINE, baseline)
+        result = ccs811NWriteRegisters(CCS811_BASELINE, [baselineMSB, baselineLSB])
         return result
 
 def ccs811Begin(driveMode):
