@@ -17,11 +17,12 @@ import json
 # status: Sensor status
 # eCO2_ppm: eCO2
 # bVOCe_ppm: bVOC
+
 def get_bme680():
   stream = os.popen('./bsec_bme680')
   return json.loads(stream.read())
 
 while True:
-  values = get_bme680();
-  print("IAQ:", values["IAQ"], "Presure:", values["press"])
+  values = get_bme680()
+  print("IAQ:", values["IAQ"], "Pressure:", values["press"])
   sleep(5)
