@@ -3,9 +3,27 @@
 # bsec_bme680
 # bsec_iaq.config
 # bsec_iaq.state
-from time import sleep
-import os
-import json
+
+from time import sleep, ctime
+from threading import Thread
+import json, subprocess
+
+bme_data = {};  
+
+def run_bme680():
+  global bme_data
+  command = './bsec_bme680'
+  process = subprocess.Popen(command, stdout=subprocess.PIPE)
+  while True:
+    output = process.stdout.readline()
+    if output:
+      print(output)
+      bme_data = json.loads(output)
+    else:
+      print('... adquisition stopped')
+      break
+
+Thread(target=run_bme680, args=[]).start()
 
 # Parameters you can pick from dictionary:
 # IAQa: IAQ Accuracy
@@ -18,11 +36,12 @@ import json
 # eCO2_ppm: eCO2
 # bVOCe_ppm: bVOC
 
-def get_bme680():
-  stream = os.popen('./bsec_bme680')
-  return json.loads(stream.read())
-
 while True:
-  values = get_bme680()
-  print("IAQ:", values["IAQ"], "Pressure:", values["press"])
   sleep(5)
+  print(
+    ctime(),
+    "IAQ:", bme_data["IAQ"],
+    "Pressure:", bme_data["press"],
+    "eCO2_ppm:", bme_data["eCO2_ppm"],
+    "bVOCe_ppm:", bme_data["bVOCe_ppm"]
+  )
