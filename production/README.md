@@ -1,7 +1,9 @@
 # I2C Sensors
+
 > Read air quality sensors from RPi
 
 ## Group Test
+
 After installing the requiremens stated on each sensor run the following command:
 
 ```bash
@@ -9,6 +11,7 @@ $ python3 group_test.py
 ```
 
 ## CSS811
+
 I2C Bus Address: 0x5B
 
 Documentation: https://itbrainpower.net/a-gsm/RaspberryPI-CCS811-sensor_howto
@@ -51,6 +54,14 @@ Documentation: https://sensirion.github.io/python-shdlc-sfa3x/
 
 Requirements:
 
+* Set the /dev/ttyS0 as a UART device with ```raspi-config```, go to _Interface Options_ then _Serial port_, there disable the serial shell, then enable the hardware serial port. If set correctly it should ask for a reboot (reboot is required only once) 
+
+```bash
+$ sudo raspi-config
+```
+
+* Install libraries
+
 ```bash
 $ pip3 install sensirion-shdlc-sfa3x
 ```
@@ -75,6 +86,7 @@ Circuit python:
 ```bash
 $ pip3 install adafruit-circuitpython-lis3dh
 ```
+
 Sensor library:
 
 ```bash
@@ -88,7 +100,8 @@ $ python3 sgp40_test.py
 ```
 
 ## Logger
-This script captures data in continus mode, once we stop the program with ```ctrl + c``` it creates a cvs file with all the stored data.
+
+This script captures data in continus mode, once we stop the program with `` `ctrl + c` `` it creates a cvs file with all the stored data.
 
 It can be used with 'file name' or without it.
 
@@ -107,15 +120,19 @@ root@remoteserver.com password
 ## Steps to set SSH tunnels with this server
 
 ### On Master or on the RemoteServer
+
 ```bash
 sudo nano /etc/ssh/sshd_config
 ```
+
 add the following line:
+
 ```bash
 GatewayPorts yes
 ```
 
 ### On Slave or on the Raspberries
+
 ```bash
 ssh-keygen -t rsa
 ssh-copy-id -i ~/.ssh/id_rsa.pub root@remoteserver.com
