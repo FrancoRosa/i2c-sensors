@@ -102,27 +102,44 @@ $ python3 sgp40_test.py
 ## Fan
 
 The fan controller will be connected to the PI using a ttl-USB adapter, in order to have that resource available as '/dev/ttyUSBFan' it is required to do the following configuration 
-Append the new rules on "/etc/udev/rules.d/99-com.rules" 
+Append the new rules on `/etc/udev/rules.d/99-com.rules` 
 
 1. Add a rule that maps the USB-ttl adapter to the specific product and vendor.
-  - Append the following line to `99-com.rules`
-    ```BASH
-    SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", SYMLINK+="ttyUSBfan"
-    ```
+  + Append the following line to `99-com.rules`
 
-    ``` BASH
-    sudo nano /etc/udev/rules.d/99-com.rules 
-    ```
+```BASH
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", SYMLINK+="ttyUSBfan"
+```
+
+    
+
+```BASH
+sudo nano /etc/udev/rules.d/99-com.rules 
+```
 
 2. Reload the udev rules with the following commands:
-    ``` BASH
-    sudo udevadm control -R
-    ```
+
+```BASH
+sudo udevadm control -R
+```
+
 3. Connect and disconnect the USB-ttl adapter or reboot to see a new `/dev/ttyUSBFan` device.
+
+The fan.py file is a module to be called from other scripts
+
+```Python
+from time import sleep
+from fan import *
+
+fan_on()
+fan_speed(50)
+sleep(10)
+fan_off()
+```
 
 ## Logger
 
-This script captures data in continus mode, once we stop the program with `` `ctrl + c` `` it creates a cvs file with all the stored data.
+This script captures data in continus mode, once we stop the program with ` ` ` ctrl + c ` ` ` it creates a cvs file with all the stored data.
 
 It can be used with 'file name' or without it.
 
