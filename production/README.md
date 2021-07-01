@@ -43,7 +43,13 @@ $ pip3 install bme680
 Test script:
 
 ```bash
-$ python3 ccs811_test.py
+$ python3 bme680_test.py
+```
+
+Test script with bosh algorithm:
+
+```bash
+$ python3 bme680_test_new.py
 ```
 
 ## Sensirion SFA30
