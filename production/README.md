@@ -129,7 +129,7 @@ sudo nano /etc/udev/rules.d/99-com.rules
 sudo udevadm control -R
 ```
 
-3. Connect and disconnect the USB-ttl adapter or reboot to see a new `/dev/ttyUSBFan` device.
+3. Connect and disconnect the USB-ttl adapter or reboot the RPi, then type: `ls /dev/serial/by-path/ -lh` to see a new `/dev/ttyUSBFan` device.
 
 The fan.py file is a module to be called from other scripts
 
